@@ -1,0 +1,23 @@
+{
+  "name": "web-app",
+  "author": "Beni",
+  "version": "0.2.0",
+  "dependencies": {
+    "mustache": "^4.2.0"
+  },
+  "description": "Web Application",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avram-beni11/web-mobile-cw2-p2.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avram-beni11/web-mobile-cw2-p2/issues"
+  },
+  "homepage": "https://github.com/avram-beni11/web-mobile-cw2-p2#readme"
+}
