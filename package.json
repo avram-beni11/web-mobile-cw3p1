@@ -5,7 +5,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "mongodb": "^5.0.0",
+    "mongodb": "^4.12.1",
+    "morgan": "^1.10.0",
     "mustache": "^4.2.0",
     "nodemon": "^2.0.20",
     "properties-reader": "^2.2.0"
@@ -14,7 +15,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node database.js"
+    "start": "node fetch-server.js"
   },
   "repository": {
     "type": "git",
