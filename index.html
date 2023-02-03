@@ -5,12 +5,83 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" src="style.css">
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Coursework 2 </title>
 </head>
 <body>
-    <p>
-        Hello World
-    </p>
+    <div id="app">
+        <button class="btn" v-on:click='showCheckout'>{{cartItemCount}}<span
+                class="fa fa-shopping-basket"></span>Basket</button>
+        <div v-if="showCart">
+            <input type="text" id="myInput" placeholder="Search for products">
+            <div class="sorting">
+                <h1>Sort by</h1>
+                <p>
+                    <input type="radio" name="Attributes" @click="sortTable('name')">
+                    <label for="Name">Name</label>
+                    <input type="radio" name="Attributes" @click="sortTable('location')">
+                    <label for="Location">Location</label>
+                    <input type="radio" name="Attributes" @click="sortTable('price')">
+                    <label for="Price">Price</label>
+                    <input type="radio" name="Attributes" @click="sortTable('spaces')">
+                    <label for="Space">Space</label>
+                </p>
+                <p>
+                    <input type="radio" name="fav" @click="sortTable('asc')">
+                    <label for="Name">Ascending</label>
+                    <input type="radio" name="fav" @click="sortTable('desc')">
+                    <label for="Location">Descscending</label>
+                </p>
+            </div>
+            <div id="productCards">
+                <div v-for="products in products" id="products">
+                    <img v-bind:src="products.image">
+                    <h1>{{ products.name }}</h1>
+                    <h2 v-html="products.description"></h2>
+                    <p>Price: £{{products.price}}</p>
+                    <p>Location: {{products.location}}</p>
+                    <p>
+                        <b>Spaces:</b>
+                        <span v-if="products.spaces">Only {{products.spaces}} left!</span>
+                        <!--Similar to an if statement. Will display the spaces left-->
+                        <span v-if="products.spaces === 0">OUT OF STOCK!</span>
+                        <!--Once spaces reaches 0, text changed to "OUR OF STOCK"-->
+                    </p>
+                    <button class="Addbtn" id="addButt" v-on:click="addItem(products)" :disabled="products.spaces === 0">
+                        <span v-if="products.spaces > 0">Purchase products</span>
+                        <span v-if="products.spaces === 0">OUT OF STOCK!</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            <div id="productCards">
+                <div v-for="products in productss" v-if="cartCount(products.id) > 0" id="products2">
+                    <h1>{{ products.name }}</h1>
+                    <h2 v-html="products.description"></h2>
+                    <p>Price: £{{products.price}}</p>
+                    <p>Location: {{products.location}}</p>
+                    <button v-on:click="remove(products)">Delete Order</button>
+                </div>
+            </div>
+            <p>
+                Name:<br>
+                <input type="text" v-model.trim="name" placeholder="Name..." required>
+            </p>
+            <p>
+                Phone Number:<br>
+                <input type="number" v-model.number="phone" placeholder="Phone No." required>
+            </p>
+            <p>
+                E-Mail:<br>
+                <input type="email" v-model.number="email" placeholder="E-Mail" required>
+            </p>
+
+            <button v-on:click="submitCheck">Check Out</button>
+        </div>
+    </div>
     <script src="app.js"></script>
+    <script src="fetch-server.js"></script>
 </body>
 </html>
