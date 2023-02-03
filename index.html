@@ -37,7 +37,7 @@
                 </p>
             </div>
             <div id="productCards">
-                <div v-for="product in products" id="products">
+                <!-- <div v-for="product in products" id="products">
                     <img v-bind:src="product.image">
                     <h1>{{ product.name }}</h1>
                     <h2 v-html="product.description"></h2>
@@ -46,26 +46,29 @@
                     <p>
                         <b>Spaces:</b>
                         <span v-if="product.spaces">Only {{product.spaces}} left!</span>
-                        <!--Similar to an if statement. Will display the spaces left-->
+                        Similar to an if statement. Will display the spaces left
                         <span v-if="product.spaces === 0">OUT OF STOCK!</span>
-                        <!--Once spaces reaches 0, text changed to "OUR OF STOCK"-->
+                        Once spaces reaches 0, text changed to "OUR OF STOCK"
                     </p>
                     <button class="Addbtn" id="addButt" v-on:click="addItem(product)" :disabled="product.spaces === 0">
                         <span v-if="product.spaces > 0">Purchase products</span>
                         <span v-if="product.spaces === 0">OUT OF STOCK!</span>
                     </button>
-                </div>
+                </div> -->
             </div>
         </div>
         <div v-else>
             <div id="productCards">
-                <div v-for="products in productss" v-if="cartCount(products.id) > 0" id="products2">
+                <!-- <div v-for="products in productss" v-if="cartCount(products.id) > 0" id="products2">
                     <h1>{{ products.name }}</h1>
                     <h2 v-html="products.description"></h2>
                     <p>Price: £{{products.price}}</p>
                     <p>Location: {{products.location}}</p>
                     <button v-on:click="remove(products)">Delete Order</button>
-                </div>
+                </div> -->
+            </div>
+            <div id="container">
+
             </div>
             <p>
                 Name:<br>
