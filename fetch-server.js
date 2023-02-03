@@ -30,9 +30,9 @@ app.param('collectionName'
       return next();
    });
 
-// app.get('/', (req, res) => {
-//    res.send('Hello World!');
-// });
+app.get('/', (req, res) => {
+   res.send('Hello World!');
+});
 
 app.get('/collections/:collectionName'
    , function (req, res, next) {
