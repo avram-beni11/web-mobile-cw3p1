@@ -1,4 +1,50 @@
-// const app = Vue.createApp({
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <title>Lesson Store</title>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1 v-text="sitename"></h1>
+            <button @click=""toggleShowProduct>
+                {{totalItemsInTheCart}}
+                <span class="fas fa-shopping-basket"></span>
+                Checkout
+            </button>
+            <button @click="saveProductToDB">
+                <span class="fas fa-save"></span>
+                Test Save Product
+            </button>
+        </header>
+
+        <div v-if="showProduct">
+            <main>
+                <div v-for="product in sortedProducts">
+                    <h1 v-text="product.title"></h1>
+                    <figure>
+                        <img v-bind:src="product.image">
+                    </figure>
+                    <p v-text="product.description"></p>
+                    <p>Price: {{product.price}}</p>
+                    <button v-if="canAddToCart(product)" v-on:click="addItemToCart(product)">
+                        Add to Cart
+                    </button>
+                    <button v-else disabled> Add to Cart
+
+                    </button>
+                    <span v-if="itemsLeft(product) === 0">Al out</span>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script>
+        // const app = Vue.createApp({
 //     el: '#app',
 //     data() {
 //         return {
@@ -110,3 +156,6 @@ let Webstore = new Vue ({
         );
     },
 })
+    </script>
+</body>
+</html>

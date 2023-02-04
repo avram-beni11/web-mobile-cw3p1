@@ -1,6 +1,8 @@
 const path = require("path");
 const express = require("express");
 const app = express();
+const cors = require("cors");
+const morgan = require("morgan");
 
 
 let propertiesReader = require("properties-reader");
@@ -21,6 +23,9 @@ const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
 let db = client.db(dbName);
 
 app.use(express.json());
+app.use(cors());
+//Logger middleware
+app.use(morgan("short"));
 
 app.set('json spaces', 3);
 

@@ -8,7 +8,6 @@
     <link rel="stylesheet" src="style.css">
     <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Coursework 2 </title>
 </head>
 
 <body>
@@ -37,7 +36,7 @@
                 </p>
             </div>
             <div id="productCards">
-                <!-- <div v-for="product in products" id="products">
+                <div v-for="product in products" id="products">
                     <img v-bind:src="product.image">
                     <h1>{{ product.name }}</h1>
                     <h2 v-html="product.description"></h2>
@@ -46,26 +45,26 @@
                     <p>
                         <b>Spaces:</b>
                         <span v-if="product.spaces">Only {{product.spaces}} left!</span>
-                        Similar to an if statement. Will display the spaces left
+                        <!-- Similar to an if statement. Will display the spaces left -->
                         <span v-if="product.spaces === 0">OUT OF STOCK!</span>
-                        Once spaces reaches 0, text changed to "OUR OF STOCK"
+                        <!-- Once spaces reaches 0, text changed to "OUR OF STOCK" -->
                     </p>
                     <button class="Addbtn" id="addButt" v-on:click="addItem(product)" :disabled="product.spaces === 0">
                         <span v-if="product.spaces > 0">Purchase products</span>
                         <span v-if="product.spaces === 0">OUT OF STOCK!</span>
                     </button>
-                </div> -->
+                </div>
             </div>
         </div>
         <div v-else>
             <div id="productCards">
-                <!-- <div v-for="products in productss" v-if="cartCount(products.id) > 0" id="products2">
-                    <h1>{{ products.name }}</h1>
-                    <h2 v-html="products.description"></h2>
-                    <p>Price: £{{products.price}}</p>
-                    <p>Location: {{products.location}}</p>
-                    <button v-on:click="remove(products)">Delete Order</button>
-                </div> -->
+                <div v-for="product in products" v-if="cartCount(products.id) > 0" id="products2">
+                    <h1>{{ product.name }}</h1>
+                    <h2 v-html="product.description"></h2>
+                    <p>Price: £{{product.price}}</p>
+                    <p>Location: {{product.location}}</p>
+                    <button v-on:click="remove(product)">Delete Order</button>
+                </div>
             </div>
             <div id="container">
 
@@ -86,8 +85,86 @@
             <button v-on:click="submitCheck">Check Out</button>
         </div>
     </div>
-    <script src="app.js"></script>
+
+    <!-- <script src="app.js"></script> -->
+    <script>
+        const app = Vue.createApp({
+            el: '#app',
+            data() {
+                return {
+                    cart: [],
+                    sortedPrice: true,
+                    showProducts: 0,
+                    sortingOrder: "asc",
+                    sortBy: "name",
+                    products: [],
+                    orders:
+                    {
+                        name: '',
+                        phone: '',
+                        slots: [],
+                    },
+                    lessonsData: [],
+                    cartData: []
+                }
+            },
+
+            created: function () {
+                fetch("http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products").then(
+                    function (response) {
+                        response.json.then(
+                            function (json) {
+                                alert(json);
+                                Webstore.products = json;
+                            }
+                        )
+                    }
+                );
+            },
+        });
+        // let Webstore = new Vue({
+        //     el: "#app",
+        //     data: {
+        //         sitename: "Lesson Store",
+        //         showProduct: true,
+        //         products: [],
+        //         cart: [],
+        //         order: {
+        //             name: "",
+        //             surname: "",
+        //             address: "",
+        //             city: "",
+        //             state: "",
+        //             zip: "",
+        //             gift: "Do not send as gift",
+        //             method: "Home",
+        //             sendGift: "Send as gift",
+        //             dontSendGift: "Do not send as gift"
+        //         },
+        //         states: {
+        //             AL: "Alabama",
+        //             AR: "Arizona",
+        //             CA: "California",
+        //             NV: "Nevada"
+        //         }
+        //     },
+        //     created: function () {
+        //         fetch("http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products").then(
+        //             function (response) {
+        //                 response.json.then(
+        //                     function (json) {
+        //                         alert(json);
+        //                         Webstore.products = json;
+        //                     }
+        //                 )
+        //             }
+        //         );
+        //     },
+        // })
+    </script>
     <script src="fetch-server.js"></script>
 </body>
+
+
 
 </html>
