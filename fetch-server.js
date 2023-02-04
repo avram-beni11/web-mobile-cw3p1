@@ -116,6 +116,14 @@ app.put('/collections/:collectionName/:id'
       );
    });
 
+var staticPath = path.join(__dirname, "static");
+app.use(express.static(staticPath));
+
+app.use(function(req, res){
+   res.status(404);
+   res.send("File not found. Try again.")
+})
+
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
    console.log("App started on port: " + port);

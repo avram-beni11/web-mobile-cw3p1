@@ -8,8 +8,8 @@ const app = new Vue({
             showCart: true,
             sortingOrder: "asc",
             sortBy: "name",
-            url: "http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections",
-            //url: "http://localhost:3000/collections",
+            //url: "http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections",
+            url: "http://localhost:3000/collections",
             orders:
             {
                 name: '',
@@ -21,7 +21,7 @@ const app = new Vue({
 
     //fetching the products in json from the get path
     created: function () {
-      fetch("http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products")
+      fetch("http://localhost:3000/collections/products")
         .then((response) => response.json())
         .then((products) => {
           this.products = products;
