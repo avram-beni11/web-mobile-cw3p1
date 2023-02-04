@@ -62,6 +62,7 @@ const app = new Vue({
             } else {
                 this.lessons.sort((a, b) => a[key] < b[key] ? 1 : -1)
             }
+            //DO THE CURL GET STUFF TO SORT
         },
         showCheckout() {
             this.showCart = this.showCart ? false : true;
