@@ -22,10 +22,9 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
 let db = client.db(dbName);
 
-app.use(express.json());
 app.use(cors());
-//Logger middleware
 app.use(morgan("short"));
+app.use(express.json());
 
 app.set('json spaces', 3);
 
