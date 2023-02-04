@@ -86,83 +86,8 @@
         </div>
     </div>
 
-    <!-- <script src="app.js"></script> -->
-    <script>
-        const app = Vue.createApp({
-            el: '#app',
-            data() {
-                return {
-                    cart: [],
-                    sortedPrice: true,
-                    showProducts: 0,
-                    sortingOrder: "asc",
-                    sortBy: "name",
-                    products: [],
-                    orders:
-                    {
-                        name: '',
-                        phone: '',
-                        slots: [],
-                    },
-                    lessonsData: [],
-                    cartData: []
-                }
-            },
+    <script src="app.js"></script>
 
-            created: function () {
-                fetch("http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products").then(
-                    function (response) {
-                        response.json.then(
-                            function (json) {
-                                alert(json);
-                                Webstore.products = json;
-                            }
-                        )
-                    }
-                );
-            },
-        });
-        // let Webstore = new Vue({
-        //     el: "#app",
-        //     data: {
-        //         sitename: "Lesson Store",
-        //         showProduct: true,
-        //         products: [],
-        //         cart: [],
-        //         order: {
-        //             name: "",
-        //             surname: "",
-        //             address: "",
-        //             city: "",
-        //             state: "",
-        //             zip: "",
-        //             gift: "Do not send as gift",
-        //             method: "Home",
-        //             sendGift: "Send as gift",
-        //             dontSendGift: "Do not send as gift"
-        //         },
-        //         states: {
-        //             AL: "Alabama",
-        //             AR: "Arizona",
-        //             CA: "California",
-        //             NV: "Nevada"
-        //         }
-        //     },
-        //     created: function () {
-        //         fetch("http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products").then(
-        //             function (response) {
-        //                 response.json.then(
-        //                     function (json) {
-        //                         alert(json);
-        //                         Webstore.products = json;
-        //                     }
-        //                 )
-        //             }
-        //         );
-        //     },
-        // })
-    </script>
-    <script src="fetch-server.js"></script>
 </body>
 
 
