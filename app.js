@@ -8,8 +8,8 @@ const app = new Vue({
             showCart: true,
             sortingOrder: "asc",
             sortBy: "name",
-            //url: "http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections",
-            url: "http://localhost:3000/collections",
+            url: "http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections",
+            //url: "http://localhost:3000/collections",
             orders:
             {
                 name: '',
@@ -21,7 +21,7 @@ const app = new Vue({
 
     //fetching the products in json from the get path
     created: function () {
-      fetch("http://localhost:3000/collections/products")
+      fetch("http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products")
         .then((response) => response.json())
         .then((products) => {
           this.products = products;
@@ -37,7 +37,39 @@ const app = new Vue({
               .then((products) => {
                 this.products = products;
               });
-        }
+        },//end get products
+        addItem: function (lesson) {
+            this.cart.push(lesson.id);
+            lesson.spaces -= 1;
+
+        },
+        canAddToCart: function (lesson) {
+            return lesson.spaces > this.cartCount(lesson.id);
+        },
+        cartCount(id) {
+            let count = 0;
+            for (let i = 0; i < this.cart.length; i++) {
+                if (this.cart[i] === id) {
+                    count++;
+                }
+            }
+            return count;
+        },
+        sortTable(key, direction) {
+            this.sort = `${key} > ${direction}`
+            if (direction === 'asc') {
+                this.lessons.sort((a, b) => a[key] > b[key] ? 1 : -1)
+            } else {
+                this.lessons.sort((a, b) => a[key] < b[key] ? 1 : -1)
+            }
+        },
+        showCheckout() {
+            this.showCart = this.showCart ? false : true;
+        },
+        submitCheck() {
+            alert('Thank You For Shopping!')
+            location.reload();
+        },
     }        
         
 });
