@@ -2,30 +2,30 @@ const app = new Vue({
     el: '#app',
     data() {
         return {
+            products: [],
             cart: [],
             sortedPrice: true,
             showCart: true,
             sortingOrder: "asc",
             sortBy: "name",
-            url: "http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections",
-            //url: "http://localhost:3000/collections",
+            //url: "http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections",
+            url: "http://localhost:3000/collections",
             orders:
             {
                 name: '',
                 phone: '',
                 slots: [],
             },
-            products: [],
-            cartData: []
         }
     },
 
     //fetching the products in json from the get path
     created: function () {
-      fetch("http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products")
+      fetch("http://localhost:3000/collections/products")
         .then((response) => response.json())
         .then((products) => {
           this.products = products;
+          return;
         });
       this.getproducts();
     },

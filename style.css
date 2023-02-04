@@ -1,0 +1,56 @@
+#products {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: smaller;
+    text-align: center;
+    border: 5px solid black;
+    max-width: 400px;
+}
+
+#addButt {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 405px;
+    font-size: 18px;
+}
+
+#addButt:hover {
+    background-color: rgb(39, 39, 39);
+}
+
+#app {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#productCards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#productCardsCart {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#lesson2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: smaller;
+    text-align: center;
+    border: 5px solid black;
+    max-width: 400px;
+    min-width: 400px;
+}
+
+#sorting {
+    position: relative;
+    left:500px; 
+}
