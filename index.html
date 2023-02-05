@@ -10,61 +10,63 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         #products {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: smaller;
-    text-align: center;
-    border: 5px solid black;
-    max-width: 400px;
-}
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: smaller;
+            text-align: center;
+            border: 5px solid black;
+            max-width: 400px;
+        }
 
-#addButt {
-    border: none;
-    outline: 0;
-    padding: 12px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 405px;
-    font-size: 18px;
-}
 
-#addButt:hover {
-    background-color: rgb(39, 39, 39);
-}
 
-#app {
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
+        #addButt {
+            border: none;
+            outline: 0;
+            padding: 12px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 405px;
+            font-size: 18px;
+        }
 
-#productCards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
+        #addButt:hover {
+            background-color: rgb(39, 39, 39);
+        }
 
-#productCardsCart {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
+        #app {
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-#lesson2 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: smaller;
-    text-align: center;
-    border: 5px solid black;
-    max-width: 400px;
-    min-width: 400px;
-}
+        #productCards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-#sorting {
-    position: relative;
-    left:500px; 
-}
+        #productCardsCart {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #lesson2 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: smaller;
+            text-align: center;
+            border: 5px solid black;
+            max-width: 400px;
+            min-width: 400px;
+        }
+
+        #sorting {
+            position: relative;
+            left: 500px;
+        }
     </style>
 </head>
 
@@ -118,17 +120,23 @@
         </div>
         <div v-else>
             <div id="productCards">
-                <div v-for="product in products" v-if="cartCount(products.id) > 0" id="products2">
-                    <h1>{{ product.name }}</h1>
+                <div v-for="product in products" v-if="cartCount(products.id) > 0" id="lesson2">
+                    <!-- <h1>{{ product.name }}</h1>
+                    <h2 v-html="product.description"></h2>
+                    <p>Price: £{{product.price}}</p>
+                    <p>Location: {{product.location}}</p> -->
+                    <ul v-for="(item,index) in cart">
+                        <li v-if="product.id === product" class="checkout_page"></li>
+                            <h1>{{ product.name }}</h1>
                     <h2 v-html="product.description"></h2>
                     <p>Price: £{{product.price}}</p>
                     <p>Location: {{product.location}}</p>
-                    <button v-on:click="remove(product)">Delete Order</button>
+                            <button @click="removeLesson(index)">Delete Order</button>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div id="container">
-
-            </div>
+            
             <p>
                 Name:<br>
                 <input type="text" v-model.trim="name" placeholder="Name..." required>
@@ -137,16 +145,12 @@
                 Phone Number:<br>
                 <input type="number" v-model.number="phone" placeholder="Phone No." required>
             </p>
-            <p>
-                E-Mail:<br>
-                <input type="email" v-model.number="email" placeholder="E-Mail" required>
-            </p>
 
-            <button v-on:click="submitCheck">Check Out</button>
+            <button @click="submitCheck">Check Out</button>
         </div>
-    </div>
+        </div>
 
-    <script src="app.js"></script>
+        <script src="app.js"></script>
 
 </body>
 
