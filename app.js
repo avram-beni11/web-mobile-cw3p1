@@ -10,7 +10,7 @@ const app = new Vue({
             sortBy: "name",
             //url: "http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections",
             url: "http://localhost:3000/collections",
-            searchTerm: " ",
+            searchText: " ",
             searchResults: [],
             orders:
             {
@@ -74,7 +74,7 @@ const app = new Vue({
             location.reload();
         },
         search() {
-            fetch(`http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/lessons/search?q=${this.searchTerm}`)
+            fetch(`http://localhost:3000/collections/lessons/search?q=${this.searchText}`)
                 .then(response => response.json())
                 .then(data => {
                     this.searchResults = data;

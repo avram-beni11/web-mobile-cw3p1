@@ -65,6 +65,15 @@
             position: relative;
             left: 500px;
         }
+
+        #search_bar {
+            height: 10px;
+
+        }
+
+        #btn {
+            height: 20px;
+        }
     </style>
 </head>
 
@@ -73,80 +82,81 @@
         <button class="btn" v-on:click='showCheckout'>{{cartItemCount}}<span
                 class="fa fa-shopping-basket"></span>Basket</button>
         <div v-if="showCart">
+        <div class="search_bar">
             <input class="searchbar" type="text" v-model="searchTerm" @input="search" placeholder="Search...">
-            <div class="sorting">
-                <h1>Sort by</h1>
-                <p>
-                    <input type="radio" name="Attributes" @click="sortTable('name')">
-                    <label for="Name">Name</label>
-                    <input type="radio" name="Attributes" @click="sortTable('location')">
-                    <label for="Location">Location</label>
-                    <input type="radio" name="Attributes" @click="sortTable('price')">
-                    <label for="Price">Price</label>
-                    <input type="radio" name="Attributes" @click="sortTable('spaces')">
-                    <label for="Space">Space</label>
-                </p>
-                <p>
-                    <input type="radio" name="fav" @click="sortTable('asc')">
-                    <label for="Name">Ascending</label>
-                    <input type="radio" name="fav" @click="sortTable('desc')">
-                    <label for="Location">Descscending</label>
-                </p>
-            </div>
-            <div id="productCards">
-                <div v-if="searchResults.length">
-                    <main>
-                        <div v-for="product in products" id="products">
-                            <img v-bind:src="product.image">
-                            <h1>{{ product.name }}</h1>
-                            <h2 v-html="product.description"></h2>
-                            <p>Price: £{{product.price}}</p>
-                            <p>Location: {{product.location}}</p>
-                            <p>
-                                <b>Spaces:</b>
-                                <span v-if="product.spaces">Only {{product.spaces}} left!</span>
-                                <!-- Similar to an if statement. Will display the spaces left -->
-                                <span v-if="product.spaces === 0">OUT OF STOCK!</span>
-                                <!-- Once spaces reaches 0, text changed to "OUR OF STOCK" -->
-                            </p>
-                            <button class="Addbtn" id="addButt" v-on:click="addItem(product)"
-                                :disabled="product.spaces === 0">
-                                <span v-if="product.spaces > 0">Purchase products</span>
-                                <span v-if="product.spaces === 0">OUT OF STOCK!</span>
-                            </button>
-                        </div>
-                    </main>
-                </div>
-            </div>
         </div>
-        <div v-else>
-            <div id="productCards">
-                <div v-for="product in searchResults" v-if="cartCount(products.id) > 0" id="products2">
+        <div class="sorting">
+            <h1>Sort by</h1>
+            <p>
+                <input type="radio" name="Attributes" @click="sortTable('name')">
+                <label for="Name">Name</label>
+                <input type="radio" name="Attributes" @click="sortTable('location')">
+                <label for="Location">Location</label>
+                <input type="radio" name="Attributes" @click="sortTable('price')">
+                <label for="Price">Price</label>
+                <input type="radio" name="Attributes" @click="sortTable('spaces')">
+                <label for="Space">Space</label>
+            </p>
+            <p>
+                <input type="radio" name="fav" @click="sortTable('asc')">
+                <label for="Name">Ascending</label>
+                <input type="radio" name="fav" @click="sortTable('desc')">
+                <label for="Location">Descscending</label>
+            </p>
+        </div>
+        <div id="productCards">
+            <!-- <div v-if="searchResults.length"> -->
+            <main>
+                <div v-for="product in products" id="products">
+                    <img v-bind:src="product.image">
                     <h1>{{ product.name }}</h1>
                     <h2 v-html="product.description"></h2>
                     <p>Price: £{{product.price}}</p>
                     <p>Location: {{product.location}}</p>
-                    <button v-on:click="remove(product)">Delete Order</button>
+                    <p>
+                        <b>Spaces:</b>
+                        <span v-if="product.spaces">Only {{product.spaces}} left!</span>
+                        <!-- Similar to an if statement. Will display the spaces left -->
+                        <span v-if="product.spaces === 0">OUT OF STOCK!</span>
+                        <!-- Once spaces reaches 0, text changed to "OUR OF STOCK" -->
+                    </p>
+                    <button class="Addbtn" id="addButt" v-on:click="addItem(product)" :disabled="product.spaces === 0">
+                        <span v-if="product.spaces > 0">Purchase products</span>
+                        <span v-if="product.spaces === 0">OUT OF STOCK!</span>
+                    </button>
                 </div>
-            </div>
-            <div id="container">
-
-            </div>
-            <p>
-                Name:<br>
-                <input type="text" v-model.trim="name" placeholder="Name..." required>
-            </p>
-            <p>
-                Phone Number:<br>
-                <input type="number" v-model.number="phone" placeholder="Phone No." required>
-            </p>
-            <p>
-                E-Mail:<br>
-                <input type="email" v-model.number="email" placeholder="E-Mail" required>
-            </p>
-
-            <button v-on:click="submitCheck">Check Out</button>
+            </main>
+            <!-- </div> -->
         </div>
+    </div>
+    <div v-else>
+        <div id="productCards">
+            <div v-for="product in products" v-if="cartCount(products.id) > 0" id="products2">
+                <h1>{{ product.name }}</h1>
+                <h2 v-html="product.description"></h2>
+                <p>Price: £{{product.price}}</p>
+                <p>Location: {{product.location}}</p>
+                <button v-on:click="remove(product)">Delete Order</button>
+            </div>
+        </div>
+        <div id="container">
+
+        </div>
+        <p>
+            Name:<br>
+            <input type="text" v-model.trim="name" placeholder="Name..." required>
+        </p>
+        <p>
+            Phone Number:<br>
+            <input type="number" v-model.number="phone" placeholder="Phone No." required>
+        </p>
+        <p>
+            E-Mail:<br>
+            <input type="email" v-model.number="email" placeholder="E-Mail" required>
+        </p>
+
+        <button v-on:click="submitCheck">Check Out</button>
+    </div>
     </div>
 
     <script src="app.js"></script>
