@@ -81,7 +81,7 @@ const app = new Vue({
             this.computeLessonsForOrder();
             const newOrder = {
                 "name": this.order.name,
-                "phoneNumber": this.order.phone_number,
+                "phoneNumber": this.order.phone,
                 "lessonId": this.id,
                 "numberOfSpaces": this.spaces
             }
