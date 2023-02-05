@@ -79,11 +79,11 @@
 
 <body>
     <div id="app">
-        <button class="btn" v-on:click='showCheckout'>{{cartItemCount}}<span
+        <!-- <button class="btn" v-on:click='showCheckout'>{{cartItemCount}}<span
                 class="fa fa-shopping-basket"></span>Basket</button>
-        <div v-if="showCart">
+        <div v-if="showCart"> -->
         <div class="search_bar">
-            <input class="searchbar" type="text" v-model="searchTerm" @input="search" placeholder="Search...">
+            <input class="searchbar" type="text" v-model="searchText" @input="getproducts" placeholder="Search...">
         </div>
         <div class="sorting">
             <h1>Sort by</h1>
