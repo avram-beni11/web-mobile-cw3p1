@@ -8,8 +8,8 @@ const app = new Vue({
             showCart: true,
             sortingOrder: "asc",
             sortBy: "name",
-            url: "http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections",
-            //url: "http://localhost:3000/collections",
+            url: "https://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections",
+            //url: "https://localhost:3000/collections",
             orders:
             {
                 name: '',
@@ -21,7 +21,7 @@ const app = new Vue({
 
     //fetching the products in json from the get path
     created: function () {
-        fetch("http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products")
+        fetch("https://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products")
             .then((response) => response.json())
             .then((products) => {
                 this.products = products;
@@ -85,7 +85,7 @@ const app = new Vue({
                 "numberOfSpaces": this.orderLessonSpaces
             }
 
-            fetch("http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/orders", {
+            fetch("https://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/orders", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -114,8 +114,8 @@ const app = new Vue({
                         const updateLesson = {
                             "availableSpaces": i.availableSpaces - count
                         }
-
-                        fetch(`http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/lessons/${i._id}`, {
+https://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products
+                        fetch(`https://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/lessons/${i._id}`, {
                             method: "PUT",
                             headers: {
                                 "Content-Type": "application/json",
