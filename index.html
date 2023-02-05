@@ -108,24 +108,11 @@
                         <!-- Once spaces reaches 0, text changed to "OUR OF STOCK" -->
                     </p>
 
-                    <!-- <button v-on:click="addItemToCart(lesson)" v-if="canAddToCart(lesson)">
-                        Add to the Cart</button>
-
-                    <button v-else disabled>Add to the Cart</button>
-
-                    <span v-if="classesLeft(lesson) === 0">
-                        All out!</span>
-
-                    <span v-else-if="classesLeft(lesson) < 4">
-                        Only {{classesLeft(lesson)}} left!</span>
-
-                    <span v-else>
-                        Buy now!</span> -->
-                        
-                    <button class="Addbtn" id="addButt" v-on:click="addItem(products)" :disabled="product.spaces === 0">
+                    <button class="Addbtn" id="addButt" v-on:click="addItem(product)" :disabled="product.spaces === 0">
                         <span v-if="product.spaces > 0">Purchase products</span>
                         <span v-if="product.spaces === 0">OUT OF STOCK!</span>
                     </button>
+
                 </div>
             </div>
         </div>
@@ -149,6 +136,10 @@
             <p>
                 Phone Number:<br>
                 <input type="number" v-model.number="phone" placeholder="Phone No." required>
+            </p>
+            <p>
+                E-Mail:<br>
+                <input type="email" v-model.number="email" placeholder="E-Mail" required>
             </p>
 
             <button v-on:click="submitCheck">Check Out</button>

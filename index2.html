@@ -216,7 +216,7 @@
             //Functionality
             created: function () {
                 //Load up all the lessons
-                fetch("http://localhost:3000/collections/lessons").then(
+                fetch("https://afterschoolclasses2-env.eba-upgmncnr.eu-west-2.elasticbeanstalk.com/collections/lessons").then(
                     function (response) {
                         response.json().then(
                             function (json) {
@@ -229,7 +229,7 @@
             methods: {
                 //Searching functionality implemented in API
                 search() {
-                    fetch(`http://localhost:3000/collections/lessons/search?q=${this.searchTerm}`)
+                    fetch(`https://afterschoolclasses2-env.eba-upgmncnr.eu-west-2.elasticbeanstalk.com/collections/lessons/search?q=${this.searchTerm}`)
                         .then(response => response.json())
                         .then(data => {
                             this.searchResults = data;
@@ -254,7 +254,7 @@
                         "numberOfSpaces": this.orderLessonSpaces
                     }
 
-                    fetch("http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/order", {
+                    fetch("https://afterschoolclasses2-env.eba-upgmncnr.eu-west-2.elasticbeanstalk.com/collections/order", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -284,7 +284,7 @@
                                     "availableSpaces": i.availableSpaces - count
                                 }
 
-                                fetch(`http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/lessons/${i._id}`, {
+                                fetch(`https://afterschoolclasses2-env.eba-upgmncnr.eu-west-2.elasticbeanstalk.com/collections/lessons/${i._id}`, {
                                     method: "PUT",
                                     headers: {
                                         "Content-Type": "application/json",
