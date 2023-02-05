@@ -75,7 +75,7 @@
         <button class="btn" v-on:click='showCheckout'>{{cartItemCount}}<span
                 class="fa fa-shopping-basket"></span>Basket</button>
         <div v-if="showCart">
-            <input class="myInput" type="text" v-model="searchText" @input="search" placeholder="Search..." />
+            <!-- <input class="myInput" type="text" v-model="searchText" @input="search" placeholder="Search..." /> -->
             <div id="productCards">
                 <div v-for="product in products" id="products">
                     <img v-bind:src="product.image">
