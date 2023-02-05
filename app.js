@@ -15,8 +15,7 @@ const app = new Vue({
                 name: '',
                 phone: '',
             },
-            id: [],
-            orderLessonSpaces: null,
+            lessonsIdsOrder: [],
         }
     },
 
@@ -47,6 +46,15 @@ const app = new Vue({
         canAddToCart(lesson) {
             return lesson.spaces > this.cartCount(lesson.id);
         },
+        // cartCount(id) {
+        //     let count = 0;
+        //     for (let i = 0; i < this.cart.length; i++) {
+        //         if (this.cart[i] === id) {
+        //             count++;
+        //         }
+        //     }
+        //     return count;
+        // },
         cartCount(products) {   
             let count = 0;       //Gets the item in cart By id
             for (i = 0; i < this.cart.length; i++) {
@@ -56,6 +64,15 @@ const app = new Vue({
             }
             return count;
         },
+        sortTable(key, direction) {
+            this.sort = `${key} > ${direction}`
+            if (direction === 'asc') {
+                this.lessons.sort((a, b) => a[key] > b[key] ? 1 : -1)
+            } else {
+                this.lessons.sort((a, b) => a[key] < b[key] ? 1 : -1)
+            }
+            //DO THE CURL GET STUFF TO SORT
+        },
         showCheckout() {
             this.showCart = this.showCart ? false : true;
         },
@@ -63,9 +80,9 @@ const app = new Vue({
             this.computeLessonsForOrder();
             const newOrder = {
                 "name": this.order.name,
-                "phoneNumber": this.order.phone,
-                "lessonId": this.id,
-                "numberOfSpaces": this.spaces
+                "phoneNumber": this.order.phone_number,
+                "lessonId": this.lessonsIdsOrder,
+                "numberOfSpaces": this.orderLessonSpaces
             }
 
             fetch("http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/orders", {
@@ -95,7 +112,7 @@ const app = new Vue({
                         count = count + 1;
 
                         const updateLesson = {
-                            "spaces": i.spaces - count
+                            "availableSpaces": i.availableSpaces - count
                         }
 
                         fetch(`http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/lessons/${i._id}`, {
@@ -118,6 +135,9 @@ const app = new Vue({
             })
             alert("Thank you for submitting your order!");
         },
+        // classesLeft(lesson) {
+        //     return lesson.spaces - this.cartCount(lesson.id);
+        // },
         removeLesson(index) {
             this.cart.splice(index, 1);
         },
