@@ -46,15 +46,6 @@ const app = new Vue({
         canAddToCart(lesson) {
             return lesson.spaces > this.cartCount(lesson.id);
         },
-        // cartCount(id) {
-        //     let count = 0;
-        //     for (let i = 0; i < this.cart.length; i++) {
-        //         if (this.cart[i] === id) {
-        //             count++;
-        //         }
-        //     }
-        //     return count;
-        // },
         cartCount(products) {   
             let count = 0;       //Gets the item in cart By id
             for (i = 0; i < this.cart.length; i++) {
@@ -76,65 +67,65 @@ const app = new Vue({
         showCheckout() {
             this.showCart = this.showCart ? false : true;
         },
-        submitCheck() {
-            this.computeLessonsForOrder();
-            const newOrder = {
-                "name": this.order.name,
-                "phoneNumber": this.order.phone_number,
-                "lessonId": this.lessonsIdsOrder,
-                "numberOfSpaces": this.orderLessonSpaces
-            }
+        // submitCheck() {
+        //     this.computeLessonsForOrder();
+        //     const newOrder = {
+        //         "name": this.order.name,
+        //         "phoneNumber": this.order.phone_number,
+        //         "lessonId": this.lessonsIdsOrder,
+        //         "numberOfSpaces": this.orderLessonSpaces
+        //     }
 
-            fetch("https://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/orders", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(newOrder)
-            }).then(
-                function (response) {
-                    response.json().then(
-                        function (json) {
-                            console.log("Success: " + json.ackowledged);
+        //     fetch("https://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/orders", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(newOrder)
+        //     }).then(
+        //         function (response) {
+        //             response.json().then(
+        //                 function (json) {
+        //                     console.log("Success: " + json.ackowledged);
 
 
-                        }
-                    )
-                }
-            )
+        //                 }
+        //             )
+        //         }
+        //     )
 
-            //PUT route for updating the lessons
-            this.cart.forEach(j => {
-                this.lessons.forEach(i => {
+        //     //PUT route for updating the lessons
+        //     this.cart.forEach(j => {
+        //         this.lessons.forEach(i => {
 
-                    let count = null;
-                    if (j == i.id) {
-                        count = count + 1;
+        //             let count = null;
+        //             if (j == i.id) {
+        //                 count = count + 1;
 
-                        const updateLesson = {
-                            "availableSpaces": i.availableSpaces - count
-                        }
-https://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products
-                        fetch(`https://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/lessons/${i._id}`, {
-                            method: "PUT",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(updateLesson)
-                        }).then(
-                            function (response) {
-                                response.json().then(
-                                    function (json) {
-                                        console.log("Success: " + json.ackowledged);
-                                    }
-                                )
-                            }
-                        )
-                    }
-                })
-            })
-            alert("Thank you for submitting your order!");
-        },
+        //                 const updateLesson = {
+        //                     "availableSpaces": i.availableSpaces - count
+        //                 }
+        //                 //https://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products
+        //                 fetch(`https://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/lessons/${i._id}`, {
+        //                     method: "PUT",
+        //                     headers: {
+        //                         "Content-Type": "application/json",
+        //                     },
+        //                     body: JSON.stringify(updateLesson)
+        //                 }).then(
+        //                     function (response) {
+        //                         response.json().then(
+        //                             function (json) {
+        //                                 console.log("Success: " + json.ackowledged);
+        //                             }
+        //                         )
+        //                     }
+        //                 )
+        //             }
+        //         })
+        //     })
+        //     alert("Thank you for submitting your order!");
+        // },
         // classesLeft(lesson) {
         //     return lesson.spaces - this.cartCount(lesson.id);
         // },
