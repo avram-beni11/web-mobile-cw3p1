@@ -10,61 +10,61 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         #products {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: smaller;
-    text-align: center;
-    border: 5px solid black;
-    max-width: 400px;
-}
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: smaller;
+            text-align: center;
+            border: 5px solid black;
+            max-width: 400px;
+        }
 
-#addButt {
-    border: none;
-    outline: 0;
-    padding: 12px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 405px;
-    font-size: 18px;
-}
+        #addButt {
+            border: none;
+            outline: 0;
+            padding: 12px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 405px;
+            font-size: 18px;
+        }
 
-#addButt:hover {
-    background-color: rgb(39, 39, 39);
-}
+        #addButt:hover {
+            background-color: rgb(39, 39, 39);
+        }
 
-#app {
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
+        #app {
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-#productCards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
+        #productCards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-#productCardsCart {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
+        #productCardsCart {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-#lesson2 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: smaller;
-    text-align: center;
-    border: 5px solid black;
-    max-width: 400px;
-    min-width: 400px;
-}
+        #lesson2 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: smaller;
+            text-align: center;
+            border: 5px solid black;
+            max-width: 400px;
+            min-width: 400px;
+        }
 
-#sorting {
-    position: relative;
-    left:500px; 
-}
+        #sorting {
+            position: relative;
+            left: 500px;
+        }
     </style>
 </head>
 
@@ -73,7 +73,7 @@
         <button class="btn" v-on:click='showCheckout'>{{cartItemCount}}<span
                 class="fa fa-shopping-basket"></span>Basket</button>
         <div v-if="showCart">
-            <input type="text" id="myInput" placeholder="Search for products">
+            <input class="searchbar" type="text" v-model="searchTerm" @input="search" placeholder="Search...">
             <div class="sorting">
                 <h1>Sort by</h1>
                 <p>
@@ -94,29 +94,34 @@
                 </p>
             </div>
             <div id="productCards">
-                <div v-for="product in products" id="products">
-                    <img v-bind:src="product.image">
-                    <h1>{{ product.name }}</h1>
-                    <h2 v-html="product.description"></h2>
-                    <p>Price: £{{product.price}}</p>
-                    <p>Location: {{product.location}}</p>
-                    <p>
-                        <b>Spaces:</b>
-                        <span v-if="product.spaces">Only {{product.spaces}} left!</span>
-                        <!-- Similar to an if statement. Will display the spaces left -->
-                        <span v-if="product.spaces === 0">OUT OF STOCK!</span>
-                        <!-- Once spaces reaches 0, text changed to "OUR OF STOCK" -->
-                    </p>
-                    <button class="Addbtn" id="addButt" v-on:click="addItem(product)" :disabled="product.spaces === 0">
-                        <span v-if="product.spaces > 0">Purchase products</span>
-                        <span v-if="product.spaces === 0">OUT OF STOCK!</span>
-                    </button>
+                <div v-if="searchResults.length">
+                    <main>
+                        <div v-for="product in products" id="products">
+                            <img v-bind:src="product.image">
+                            <h1>{{ product.name }}</h1>
+                            <h2 v-html="product.description"></h2>
+                            <p>Price: £{{product.price}}</p>
+                            <p>Location: {{product.location}}</p>
+                            <p>
+                                <b>Spaces:</b>
+                                <span v-if="product.spaces">Only {{product.spaces}} left!</span>
+                                <!-- Similar to an if statement. Will display the spaces left -->
+                                <span v-if="product.spaces === 0">OUT OF STOCK!</span>
+                                <!-- Once spaces reaches 0, text changed to "OUR OF STOCK" -->
+                            </p>
+                            <button class="Addbtn" id="addButt" v-on:click="addItem(product)"
+                                :disabled="product.spaces === 0">
+                                <span v-if="product.spaces > 0">Purchase products</span>
+                                <span v-if="product.spaces === 0">OUT OF STOCK!</span>
+                            </button>
+                        </div>
+                    </main>
                 </div>
             </div>
         </div>
         <div v-else>
             <div id="productCards">
-                <div v-for="product in products" v-if="cartCount(products.id) > 0" id="products2">
+                <div v-for="product in searchResults" v-if="cartCount(products.id) > 0" id="products2">
                     <h1>{{ product.name }}</h1>
                     <h2 v-html="product.description"></h2>
                     <p>Price: £{{product.price}}</p>
