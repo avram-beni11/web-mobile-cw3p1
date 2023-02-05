@@ -8,8 +8,8 @@ const app = new Vue({
             showCart: true,
             sortingOrder: "asc",
             sortBy: "name",
-            searchTerm: '',
-            searchResults: [],
+            // searchTerm: '',
+            // searchResults: [],
             url: "http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections",
             //url: "http://localhost:3000/collections",
             orders:
@@ -34,7 +34,7 @@ const app = new Vue({
     },
     methods: {
         getproducts() {
-            const url = `http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products/?search=${this.searchText}`;
+            const url = `${this.url}/products/?search=${this.searchText}`;
             fetch(url)
                 .then((response) => response.json())
                 .then((products) => {
@@ -48,16 +48,12 @@ const app = new Vue({
         },
         // search() {
         //     fetch(`http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products/search?q=${this.searchTerm}`)
-        //       .then(response => response.json())
-        //       .then(data => {
-        //         this.products = data;
-        //       });
-        //   },
-        //   watch: {
-        //     searchTerm() {
-        //       this.search();
-        //     } NOT WORKING
-        //   },
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             this.searchResults = data;
+        //         })
+        //         .catch(error => console.error(error))
+        // },
         canAddToCart(lesson) {
             return lesson.spaces > this.cartCount(lesson.id);
         },
@@ -73,65 +69,65 @@ const app = new Vue({
         showCheckout() {
             this.showCart = this.showCart ? false : true;
         },
-        // submitCheck() {
-        //     this.computeLessonsForOrder();
-        //     const newOrder = {
-        //         "name": this.order.name,
-        //         "phoneNumber": this.order.phone,
-        //         "lessonId": this.id,
-        //         "numberOfSpaces": this.spaces
-        //     }
+        submitCheck() {
+            this.computeLessonsForOrder();
+            const newOrder = {
+                "name": this.order.name,
+                "phoneNumber": this.order.phone,
+                "lessonId": this.id,
+                "numberOfSpaces": this.spaces
+            }
 
-        //     fetch("http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/orders", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(newOrder)
-        //     }).then(
-        //         function (response) {
-        //             response.json().then(
-        //                 function (json) {
-        //                     console.log("Success: " + json.ackowledged);
+            fetch("http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/orders", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newOrder)
+            }).then(
+                function (response) {
+                    response.json().then(
+                        function (json) {
+                            console.log("Success: " + json.ackowledged);
 
 
-        //                 }
-        //             )
-        //         }
-        //     )
+                        }
+                    )
+                }
+            )
 
-        //     //PUT route for updating the lessons
-        //     this.cart.forEach(j => {
-        //         this.lessons.forEach(i => {
+            //PUT route for updating the lessons
+            this.cart.forEach(j => {
+                this.lessons.forEach(i => {
 
-        //             let count = null;
-        //             if (j == i.id) {
-        //                 count = count + 1;
+                    let count = null;
+                    if (j == i.id) {
+                        count = count + 1;
 
-        //                 const updateLesson = {
-        //                     "spaces": i.spaces - count
-        //                 }
+                        const updateLesson = {
+                            "spaces": i.spaces - count
+                        }
 
-        //                 fetch(`http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/lessons/${i._id}`, {
-        //                     method: "PUT",
-        //                     headers: {
-        //                         "Content-Type": "application/json",
-        //                     },
-        //                     body: JSON.stringify(updateLesson)
-        //                 }).then(
-        //                     function (response) {
-        //                         response.json().then(
-        //                             function (json) {
-        //                                 console.log("Success: " + json.ackowledged);
-        //                             }
-        //                         )
-        //                     }
-        //                 )
-        //             }
-        //         })
-        //     })
-        //     alert("Thank you for submitting your order!");
-        // }, DOES NOT WORK
+                        fetch(`http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/lessons/${i._id}`, {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(updateLesson)
+                        }).then(
+                            function (response) {
+                                response.json().then(
+                                    function (json) {
+                                        console.log("Success: " + json.ackowledged);
+                                    }
+                                )
+                            }
+                        )
+                    }
+                })
+            })
+            alert("Thank you for submitting your order!");
+        },
         removeLesson(index) {
             this.cart.splice(index, 1);
         },
