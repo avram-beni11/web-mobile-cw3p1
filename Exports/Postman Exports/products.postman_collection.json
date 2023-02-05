@@ -30,13 +30,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/collections/products2",
+					"raw": "{{base_url}}/collections/products",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"collections",
-						"products2"
+						"products"
 					]
 				}
 			},
@@ -100,13 +100,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/collections/products2/{{math_read_id}}",
+					"raw": "{{base_url}}/collections/products/{{math_read_id}}",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"collections",
-						"products2",
+						"products",
 						"{{math_read_id}}"
 					]
 				}
@@ -134,13 +134,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/collections/products2/{{japan_del}}",
+					"raw": "{{base_url}}/collections/products/{{japan_del}}",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"collections",
-						"products2",
+						"products",
 						"{{japan_del}}"
 					]
 				}
@@ -219,14 +219,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/collections/products/63dd1a6f6feaef80574022b0",
+					"raw": "{{base_url}}/collections/products/63dd6388df93e44f8d562e6a",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"collections",
 						"products",
-						"63dd1a6f6feaef80574022b0"
+						"63dd6388df93e44f8d562e6a"
 					]
 				}
 			},

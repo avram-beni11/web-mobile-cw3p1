@@ -75,26 +75,7 @@
         <button class="btn" v-on:click='showCheckout'>{{cartItemCount}}<span
                 class="fa fa-shopping-basket"></span>Basket</button>
         <div v-if="showCart">
-            <input type="text" id="myInput" placeholder="Search for products">
-            <div class="sorting">
-                <h1>Sort by</h1>
-                <p>
-                    <input type="radio" name="Attributes" @click="sortTable('name')">
-                    <label for="Name">Name</label>
-                    <input type="radio" name="Attributes" @click="sortTable('location')">
-                    <label for="Location">Location</label>
-                    <input type="radio" name="Attributes" @click="sortTable('price')">
-                    <label for="Price">Price</label>
-                    <input type="radio" name="Attributes" @click="sortTable('spaces')">
-                    <label for="Space">Space</label>
-                </p>
-                <p>
-                    <input type="radio" name="fav" @click="sortTable('asc')">
-                    <label for="Name">Ascending</label>
-                    <input type="radio" name="fav" @click="sortTable('desc')">
-                    <label for="Location">Descscending</label>
-                </p>
-            </div>
+            <input class="myInput" type="text" v-model="searchText" @input="search" placeholder="Search..." />
             <div id="productCards">
                 <div v-for="product in products" id="products">
                     <img v-bind:src="product.image">
@@ -120,23 +101,19 @@
         </div>
         <div v-else>
             <div id="productCards">
-                <div v-for="product in products" v-if="cartCount(products.id) > 0" id="lesson2">
-                    <!-- <h1>{{ product.name }}</h1>
-                    <h2 v-html="product.description"></h2>
-                    <p>Price: £{{product.price}}</p>
-                    <p>Location: {{product.location}}</p> -->
-                    <ul v-for="(item,index) in cart">
+                <div v-for="product in products"  id="lesson2">
+                    <ul v-for="item in cart">
                         <li v-if="product.id === product" class="checkout_page"></li>
-                            <h1>{{ product.name }}</h1>
-                    <h2 v-html="product.description"></h2>
-                    <p>Price: £{{product.price}}</p>
-                    <p>Location: {{product.location}}</p>
-                            <button @click="removeLesson(index)">Delete Order</button>
+                        <h1>{{ product.name }}</h1>
+                        <h2 v-html="product.description"></h2>
+                        <p>Price: £{{product.price}}</p>
+                        <p>Location: {{product.location}}</p>
+                        <button @click="removeLesson(index)">Delete Order</button>
                         </li>
                     </ul>
                 </div>
             </div>
-            
+
             <p>
                 Name:<br>
                 <input type="text" v-model.trim="name" placeholder="Name..." required>
@@ -148,9 +125,9 @@
 
             <button @click="submitCheck">Check Out</button>
         </div>
-        </div>
+    </div>
 
-        <script src="app.js"></script>
+    <script src="app.js"></script>
 
 </body>
 

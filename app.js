@@ -8,6 +8,8 @@ const app = new Vue({
             showCart: true,
             sortingOrder: "asc",
             sortBy: "name",
+            searchTerm: '',
+            searchResults: [],
             url: "http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections",
             //url: "http://localhost:3000/collections",
             orders:
@@ -32,7 +34,7 @@ const app = new Vue({
     },
     methods: {
         getproducts() {
-            const url = `${this.url}/products/?search=${this.searchText}`;
+            const url = `http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products/?search=${this.searchText}`;
             fetch(url)
                 .then((response) => response.json())
                 .then((products) => {
@@ -44,18 +46,21 @@ const app = new Vue({
             lesson.spaces -= 1;
 
         },
+        // search() {
+        //     fetch(`http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products/search?q=${this.searchTerm}`)
+        //       .then(response => response.json())
+        //       .then(data => {
+        //         this.products = data;
+        //       });
+        //   },
+        //   watch: {
+        //     searchTerm() {
+        //       this.search();
+        //     } NOT WORKING
+        //   },
         canAddToCart(lesson) {
             return lesson.spaces > this.cartCount(lesson.id);
         },
-        // cartCount(id) {
-        //     let count = 0;
-        //     for (let i = 0; i < this.cart.length; i++) {
-        //         if (this.cart[i] === id) {
-        //             count++;
-        //         }
-        //     }
-        //     return count;
-        // },
         cartCount(products) {   
             let count = 0;       //Gets the item in cart By id
             for (i = 0; i < this.cart.length; i++) {
@@ -65,77 +70,68 @@ const app = new Vue({
             }
             return count;
         },
-        // sortTable(key, direction) {
-        //     this.sort = `${key} > ${direction}`
-        //     if (direction === 'asc') {
-        //         this.lessons.sort((a, b) => a[key] > b[key] ? 1 : -1)
-        //     } else {
-        //         this.lessons.sort((a, b) => a[key] < b[key] ? 1 : -1)
-        //     }
-        //     //DO THE CURL GET STUFF TO SORT
-        // },
         showCheckout() {
             this.showCart = this.showCart ? false : true;
         },
-        submitCheck() {
-            this.computeLessonsForOrder();
-            const newOrder = {
-                "name": this.order.name,
-                "phoneNumber": this.order.phone,
-                "lessonId": this.id,
-                "numberOfSpaces": this.spaces
-            }
+        // submitCheck() {
+        //     this.computeLessonsForOrder();
+        //     const newOrder = {
+        //         "name": this.order.name,
+        //         "phoneNumber": this.order.phone,
+        //         "lessonId": this.id,
+        //         "numberOfSpaces": this.spaces
+        //     }
 
-            fetch("http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/orders", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(newOrder)
-            }).then(
-                function (response) {
-                    response.json().then(
-                        function (json) {
-                            console.log("Success: " + json.ackowledged);
+        //     fetch("http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/orders", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(newOrder)
+        //     }).then(
+        //         function (response) {
+        //             response.json().then(
+        //                 function (json) {
+        //                     console.log("Success: " + json.ackowledged);
 
 
-                        }
-                    )
-                }
-            )
+        //                 }
+        //             )
+        //         }
+        //     )
 
-            //PUT route for updating the lessons
-            this.cart.forEach(j => {
-                this.lessons.forEach(i => {
+        //     //PUT route for updating the lessons
+        //     this.cart.forEach(j => {
+        //         this.lessons.forEach(i => {
 
-                    let count = null;
-                    if (j == i.id) {
-                        count = count + 1;
+        //             let count = null;
+        //             if (j == i.id) {
+        //                 count = count + 1;
 
-                        const updateLesson = {
-                            "spaces": i.spaces - count
-                        }
+        //                 const updateLesson = {
+        //                     "spaces": i.spaces - count
+        //                 }
 
-                        fetch(`http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/lessons/${i._id}`, {
-                            method: "PUT",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(updateLesson)
-                        }).then(
-                            function (response) {
-                                response.json().then(
-                                    function (json) {
-                                        console.log("Success: " + json.ackowledged);
-                                    }
-                                )
-                            }
-                        )
-                    }
-                })
-            })
-            alert("Thank you for submitting your order!");
-        },
+        //                 fetch(`http://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/lessons/${i._id}`, {
+        //                     method: "PUT",
+        //                     headers: {
+        //                         "Content-Type": "application/json",
+        //                     },
+        //                     body: JSON.stringify(updateLesson)
+        //                 }).then(
+        //                     function (response) {
+        //                         response.json().then(
+        //                             function (json) {
+        //                                 console.log("Success: " + json.ackowledged);
+        //                             }
+        //                         )
+        //                     }
+        //                 )
+        //             }
+        //         })
+        //     })
+        //     alert("Thank you for submitting your order!");
+        // }, DOES NOT WORK
         removeLesson(index) {
             this.cart.splice(index, 1);
         },
