@@ -1,0 +1,20 @@
+{
+    "name": "After School Lesson",
+    "short_name": "Lesson App",
+    "description": "Purchase lessons",
+    "icons": [
+        {
+            "src": "assets/logo.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+           "src": "assets/logo2.png",
+            "sizes": "512x512",
+            "type": "image/png" 
+        }
+    ],
+    "start_url": "index.html",
+    "display": "fullscreen",
+    "background_color": "#000000"
+}

@@ -10,6 +10,7 @@ const app = new Vue({
             sortBy: "name",
             url: "https://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections",
             //url: "https://localhost:3000/collections",
+           products: products,
             orders:
             {
                 name: '',
@@ -20,24 +21,24 @@ const app = new Vue({
     },
 
     //fetching the products in json from the get path
-    created: function () {
-        fetch("https://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products")
-            .then((response) => response.json())
-            .then((products) => {
-                this.products = products;
-                return;
-            });
-        this.getproducts();
-    },
+    // created: function () {
+    //     fetch("https://lessonapp-env.eba-uiw2prds.us-east-1.elasticbeanstalk.com/collections/products")
+    //         .then((response) => response.json())
+    //         .then((products) => {
+    //             this.products = products;
+    //             return;
+    //         });
+    //     this.getproducts();
+    // },
     methods: {
-        getproducts() {
-            const url = `${this.url}/products/?search=${this.searchText}`;
-            fetch(url)
-                .then((response) => response.json())
-                .then((products) => {
-                    this.products = products;
-                });
-        },//end get products
+        // getproducts() {
+        //     const url = `${this.url}/products/?search=${this.searchText}`;
+        //     fetch(url)
+        //         .then((response) => response.json())
+        //         .then((products) => {
+        //             this.products = products;
+        //         });
+        // },//end get products
         addItem: function (lesson) {
             this.cart.push(lesson.id);
             lesson.spaces -= 1;
