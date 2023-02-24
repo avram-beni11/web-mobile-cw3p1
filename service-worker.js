@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 var cacheName = "webapp-v1";
 var cacheFiles = [
     "index.html",
@@ -31,7 +29,7 @@ self.addEventListener("install", function (e) {
 self.addEventListener("fetch", function (e) {
     e.respondWith(
         caches.match(e.request).then(function (cacheFiles) {
-            if (cachedFile) {
+            if (cacheFiles) {
                 console.log("[Service Worker] Resource fetched from the cache for: " + e.request.url);
 
                 return cacheFiles;
@@ -44,8 +42,8 @@ self.addEventListener("fetch", function (e) {
                         console.log("[Service Worker] Resource fetched and saved in the cache for: " + e.request.url);
 
                         return response;
-                    })
-                })
+                    });
+                });
             }
         })
     )
