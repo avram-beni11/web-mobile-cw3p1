@@ -1,0 +1,9 @@
+[{
+  "_id": {
+    "$oid": "63dfd0897762c46757062adf"
+  },
+  "lessonId": 1,
+  "name": "John Example",
+  "phone": "12345 6789",
+  "spaces": "3"
+}]
